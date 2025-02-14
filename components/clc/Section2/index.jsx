@@ -1,34 +1,54 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import styles from "./styles.module.scss";
 
 export default function Section2() {
+  const [activeTab, setActiveTab] = useState("PNEU");
+  const [dropdown, setDropdown] = useState({ largura: false, aro: false, perfil: false });
+
+  const toggleDropdown = (key) => {
+    setDropdown((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.yellowStrip}>
-          <div className={styles.stripContent}>
-            <div className={styles.item}>
-              <img src="/images/truck.svg" alt="Ícone de entrega" className={styles.icon} />
-              <h2>ENVIO PARA TODO O BRASIL</h2>
-              <h5>Entrega rápida e com total segurança.</h5>
-            </div>
-            <div className={styles.item}>
-              <img src="/images/credit-card.svg" alt="Ícone de cartão" className={styles.icon} />
-              <h2>PARCELE SUA COMPRA</h2>
-              <h5>Compre no cartão de crédito em até 12x.</h5>
-            </div>
-            <div className={styles.item}>
-              <img src="/images/security.svg" alt="Ícone de segurança" className={styles.icon} />
-              <h2>SITE 100% SEGURO</h2>
-              <h5>Proteção de seus dados para uma compra segura.</h5>
-            </div>
-            <div className={styles.item}>
-              <img src="/images/whatsapp-line.svg" alt="Ícone do WhatsApp" className={styles.icon} />
-              <h2>PRECISANDO DE AJUDA?</h2>
-              <h5>Entre em contato com a nossa equipe diretamente pelo WhatsApp.</h5>
-            </div>
+      {/* Barra de Pesquisa Alongada */}
+      <div className={styles.searchBar}>
+        <input type="text" placeholder="Pesquisar" />
+        <button>
+          <img src="/images/search.png" alt="Pesquisar" />
+        </button>
+      </div>
+
+      {/* Tabs de categorias */}
+      <div className={styles.tabs}>
+        {["PNEU", "CARRO", "CAMINHÃO"].map((tab) => (
+          <button
+            key={tab}
+            className={activeTab === tab ? styles.activeTab : ""}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Filtros com Dropdown */}
+      <div className={styles.filterContainer}>
+        {["largura", "aro", "perfil"].map((key) => (
+          <div key={key} className={styles.filterItem} onClick={() => toggleDropdown(key)}>
+            {key.charAt(0).toUpperCase() + key.slice(1)} <span>▼</span>
+            {dropdown[key] && (
+              <ul className={styles.dropdown}>
+                <li>Opção 1</li>
+                <li>Opção 2</li>
+                <li>Opção 3</li>
+              </ul>
+            )}
           </div>
-        </div>
+        ))}
+        <button className={styles.productsButton}>VER PRODUTOS</button>
       </div>
     </div>
   );

@@ -2,18 +2,18 @@ import styles from "./styles.module.scss";
 
 export default function Section1() {
   return (
-    <div className={styles.container}>
+    <div className={styles.hero}>
+      {/* Camada escura para sobreposição */}
+      <div className={styles.overlay}></div>
+
+      {/* Conteúdo dentro da imagem */}
       <div className={styles.content}>
-        <div className={styles.block}>
-          <h1>Encontre seu estilo único!</h1>
-          <h4>
-           Na GK GRIFES transformamos tendências em looks incríveis. Aproveite ofertas exclusivas e eleve seu guarda-roupa agora mesmo.
-          </h4>
-          <button>@GKGRIFES</button>
-        </div>
-        <div className={styles.image}>
-          <img src="/images/homegk.png" alt="Imagem da home" />
-        </div>
+        <h1> Tudo para manter seu caminhão na estrada! </h1>
+        <p>
+          Peças de qualidade, das melhores marcas, com atendimento especializado.
+          Encontre tudo o que você precisa na TrucksPro.
+        </p>
+        <button>SAIBA MAIS</button>
       </div>
     </div>
   );
